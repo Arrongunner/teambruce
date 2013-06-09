@@ -456,7 +456,7 @@ function populateUserlist() {
         	if (a[i].id === myid) {
             		str += 'chat-from-you ';
         	}
-        	str += '" onclick="$(\'#chat-input-field\').val($(\'#chat-input-field\').val() + \'@' + a[i].username + ' \').focus();" title="click to mention">' + a[i].username + '</span>';
+        	str += '" onclick="$(\'#chat-input-field\').val($(\'#chat-input-field\').val() + \'@' + a[i].username + ' \').focus();" title="Click to mention">' + a[i].username + '</span>';
         	if (typeof (a[i].vote) !== 'undefined' && a[i].vote == -1) {
             		totalMEHs++;
             		mehlist += str; 
@@ -487,9 +487,9 @@ function populateUserlist() {
 	if ($('#side-left .sidebar-content2').children().length > 0) {
             	$('#side-left .sidebar-content2').append();
 	}
-        $('#side-left .sidebar-content2').html('<h3 class="users" title="number of users in the room">users: ' + API.getUsers().length + '</h3>');
+        $('#side-left .sidebar-content2').html('<h3 class="Users" title="Number of users in the room">users: ' + API.getUsers().length + '</h3>');
         var spot = Models.room.getWaitListPosition();
-        var waitlistDiv = $('<h3 title="waitlist posisition"></h3>').addClass('waitlistspot').text('waitlist: ' + (spot !== null ? spot + ' / ' : '') + Models.room.data.waitList.length);
+        var waitlistDiv = $('<h3 title="Waitlist position"></h3>').addClass('waitlistspot').text('waitlist: ' + (spot !== null ? spot + ' / ' : '') + Models.room.data.waitList.length);
         var waitpostime = Models.room.getWaitListPosition() * 240;
         var offset = API.getMedia().duration - 240;
         var approxtime = waitpostime + offset;
@@ -498,9 +498,12 @@ function populateUserlist() {
         $('#side-left .sidebar-content2').append(spot !== null ? timeDiv : '');
         $('#side-left .sidebar-content2').append('<div class="meanlist"></div>');
         $(".meanlist").append( 
-        		'<div id="currentdj_div" style="border: 1px solid rgb(0, 112, 255);"><a title="current dj">current dj:</a>' +   currentdj + '</div>'
-        	+ 	'<div id="mehlist_div" style="border: 1px solid rgb(233, 6, 6);"><a title="meh list">meh list:</a>' +   mehlist + '</div>' 
-        	+ 	'<div id="wootlist_div" style="border: 1px solid rgb(2, 140, 7);"><a title="woot list">woot list:</a>' + wootlist + '</div>'
+        		'<div id="spacer_div"></br></br></div>'
+        	+	'<div id="currentdj_div" style="border: 2px solid rgb(0, 112, 255);"><a title="Current DJ">Current DJ:</a>' +   currentdj + '</div>'
+        	+	'<div id="spacer_div"></br></br></div>'
+        	+ 	'<div id="mehlist_div" style="border: 2px solid rgb(233, 6, 6);"><a title="Meh list">Meh list:</a>' +   mehlist + '</div>' 
+        	+	'<div id="spacer_div"></br></br></div>'
+        	+ 	'<div id="wootlist_div" style="border: 2px solid rgb(2, 140, 7);"><a title="Woot list">Woot list:</a>' + wootlist + '</div>'
         	+	'<div id="spacer_div"></br></br></div>'
         );
 }

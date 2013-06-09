@@ -242,7 +242,7 @@ function rules() {
 }
 
 function dench() {
-	alert("Definition: \n1) When something is dench, denchable, denchtastic, denchalicious or even dencherific. Dench is out of this world. Dench is amazing. Dench is everything good in your life. \n2) #StayDench or get Frimpong'd \n3)'http://media.sabotagetimes.com/wp-content/uploads/Emmanuel-Frimpong-Arsenal_2800802.jpg';");
+	alert("Definition: \n When something is dench, denchable, denchtastic, denchalicious or even dencherific. Dench is out of this world. Dench is amazing. Dench is everything good in your life. \n \n #StayDench or get Frimpong'd");
 }
 
 function initUIListeners() {

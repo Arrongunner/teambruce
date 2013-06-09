@@ -124,23 +124,23 @@ var COOKIE_AUDIENCE = 'audience';
 var COOKIE_LEFT = 'left';
 var MAX_USERS_WAITLIST = 50;
 
-var loveMsg = ["I love this song! makes me want to jizz in my pants", "this... song... is... AWESOME!!", "this song is a BEAST!", "me likes this song me does"];
-var mehMsg = ["I'm not really a fan of this song, but it's okay I guess", "this song isn't as good as others, but it could be worse"];
-var hateMsg = ["I hate this song! makes me want to vomit all over myself. just kidding, but I still don't like it", "what is this god awful noise? D:", "this song... just... eww"];
-var sleepMsg = ["Sleepy time!!!", "going to sleep now", "time to hit the sack", "so tired, sleep is needed me thinks", "tiredness... taking... over... must sleep"];
-var workMsg = ["I'm working so mention me if I'm needed", "I'm going to do work related stuffs, mention if needed", "I'm gonna be busy, mention if needed"];
-var afkMsg = ["I'm going away on a merry merry quest, be back soon!", "going AFK for a while, be back soon!", "going away, be back soon!", "going to hunt the galaxy, be back soon!"];
-var backMsg = ["I'm back from my adventures!", "I'm baaacckkk", "guess who's back? ME! I'm back :D", "be-ber-ber-b-be-back!"];
+var loveMsg = ["I love this song! Makes me want to jizz in my pants", "I love this song like a black man loves chicken!", "This... song... is... DENCH!!", "this song is a BEAST!", "Absolute fucking classic!", "#DenchTune"];
+var mehMsg = ["This is one of those songs i'm not sure if i love or hate :S", "meh.. not the best :L", "decent, but i've heard better..."];
+var hateMsg = ["I hate this song!", "wtf is this song.. #LeaveIT", "my ears are fucking bleeding, turn this shit off", "this song is worse than Dafuq League."];
+var sleepMsg = ["Off for a fap before bed, night!", "sleeping now, peace out mandems", "time to hit the sack", "so tired, *sleeps* zzzZZ!", "tiredness... must sleep... feel like a fucking zombie!", "Going to bed, night night <3"];
+var workMsg = ["Going to do some work, mention if needed!", "I'm going to do work related stuffs, do not disturb!", "I'm gonna be busy, mention if needed"];
+var afkMsg = ["I'm going for a fap, be back soon!", "Going to shag your mum!", "Going for a spray tan! #Essex #Reem", "Going to hunt the galaxy, be back soon!", "Going to go report Dafuq League!", "Gonna' go download some more RAM!"];
+var backMsg = ["Just got back from Denchville, two twos now.", "I'm baaacckkk bitches", "guess who's back? ME! I'm back :D", "I just came, what did I miss?"];
 
-var autoAwayMsg = ["I'm currently AFK", "I'm AFK", "I'm on an adventure (afk)", "gone away for a moment", "not present at keyboard"];
-var autoSlpMsg = ["I'm currently sleeping", "I'm counting sheep in my dreams", "I've hit the sack", "I'm asleep", "I've gone to sleep"];
-var autoWrkMsg = ["I'm currently working", "I'm busy", "doing work related stuffs"];
+var autoAwayMsg = ["I'm currently AFK", "I'm AFK", "Selling weed, brb. (afk)", "Gone for a wank, be back soon!", "not present at keyboard"];
+var autoSlpMsg = ["I'm currently sleeping", "I'm shagging Megan Fox in my dream, do not disturb!", "I've hit the sack", "I'm asleep", "In bed with your mum."];
+var autoWrkMsg = ["I'm currently working", "I'm busy", "I'm pretending to work, but really I'm just ignoring you...", "Trying to earn a dollar, your mum charges high rates!"];
 
 var styles = [
-            '.sidebar {position: fixed; top: 0; height: 100%; width: 200px; z-index: 99999; background-image: linear-gradient(bottom, #000000 0%, #3B5678 100%);background-image: -o-linear-gradient(bottom, #000000 0%, #3B5678 100%);background-image: -moz-linear-gradient(bottom, #000000 0%, #3B5678 100%);background-image: -webkit-linear-gradient(bottom, #000000 0%, #3B5678 100%);background-image: -ms-linear-gradient(bottom, #000000 0%, #3B5678 100%);background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #000000),color-stop(1, #3B5678));}',
+            '.sidebar {position: fixed; top: 0; height: 100%; width: 200px; z-index: 99999; background-image: linear-gradient(bottom, #000000 0%, #3F3F3F 100%);background-image: -o-linear-gradient(bottom, #000000 0%, #3F3F3F 100%);background-image: -moz-linear-gradient(bottom, #000000 0%, #3F3F3F 100%);background-image: -webkit-linear-gradient(bottom, #000000 0%, #3F3F3F 100%);background-image: -ms-linear-gradient(bottom, #000000 0%, #3F3F3F 100%);background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #000000),color-stop(1, #3F3F3F));}',
             '.sidebar#side-right {right: -190px;z-index: 99999;}',
             '.sidebar#side-left {left: -190px; z-index: 99999; }',
-            '.sidebar-handle {width: 12px;height: 100%;z-index: 99999;margin: 0;padding: 0;background: rgb(96, 141, 197);box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, .9);cursor: "ne-resize";}',
+            '.sidebar-handle {width: 12px;height: 100%;z-index: 99999;margin: 0;padding: 0;background: rgb(216, 216, 216);box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, .9);cursor: "ne-resize";}',
             '.sidebar-handle span {display: block;position: absolute;width: 10px;top: 50%;text-align: center;letter-spacing: -1px;color: #000;}',
             '.sidebar-content {position: absolute;width: 185px;height: 100%; padding-left: 15px}',
             '.sidebar-content2 {position: absolute;width: 185px;height: 100%; overflow: auto}',
@@ -215,25 +215,26 @@ function displayUI() {
     	var colorEmotes = emotes ? '#3FFF00' : '#ED1C24';
     	var colorAudience = audience ? '#3FFF00' : '#ED1C24';
 	$('#side-right .sidebar-content').append(
-			'<a id="plug-btn-woot" title="toggles auto woot" style="color:' + colorWoot + '">auto woot</a>'
-		+ 	'<a id="plug-btn-queue" title="toggles auto queue" style="color:' + colorQueue + '">auto queue</a>'
-		+ 	'<a id="plug-btn-stream" title="toggles video stream" style="color:' + colorStream + '">streaming</a>'
-		+ 	'<a id="plug-btn-hidevideo" title="toggles hide video" style="color:' + colorVideo + '">hide video</a>'
-		+	'<a id="plug-btn-emotes" title="toggles emoticons" style="color:' + colorEmotes + '">emoticons</a>'
-		+	'<a id="plug-btn-audience" title="toggles audience" style="color:' + colorAudience + '">audience</a>'
-		+	'<a  onclick="rules()" title="displays rules" style="color:#0000FF">rules</a>'
-		+	'<a id="plug-btn-lovesong" title="sends love song message" style="color:#FF8C00">loves this song</a>'
-		+	'<a id="plug-btn-mehsong" title="sends not fan of song message" style="color:#FF8C00">not fan of song</a>'
-		+	'<a id="plug-btn-hatesong" title="sends hate song message" style="color:#FF8C00">hates this song</a>'
-		+	'<a id="plug-btn-sleeping" title="sends sleep message and sets status to sleeping" style="color:#FF8C00">sleeping</a>'
-		+	'<a id="plug-btn-working" title="sends work message and sets status to working" style="color:#FF8C00">working</a>'
-		+	'<a id="plug-btn-afk" title="sends afk message and sets status to afk" style="color:#FF8C00">afk</a>'
-		+	'<a id="plug-btn-back" title="sends available message and sets status to available" style="color:#FF8C00">available</a>'
+			'<a id="plug-btn-woot" title="Toggle AutoWoot" style="color:' + colorWoot + '">AutoWoot</a>'
+		+ 	'<a id="plug-btn-queue" title="Toggle AutoQueue" style="color:' + colorQueue + '">AutoQueue</a>'
+		+ 	'<a id="plug-btn-stream" title="Toggle Video Stream" style="color:' + colorStream + '">Video Streaming</a>'
+		+ 	'<a id="plug-btn-hidevideo" title="Toggle Video" style="color:' + colorVideo + '">Hide Video</a>'
+		+	'<a id="plug-btn-emotes" title="Toggle Emoticons" style="color:' + colorEmotes + '">Emoticons</a>'
+		+	'<a id="plug-btn-audience" title="Toggle Audience" style="color:' + colorAudience + '">Audience</a>'
+		+	'<a  onclick="rules()" title="Displays Rules" style="color:#0000FF">rules</a>'
+		+	'<a id="plug-btn-lovesong" title="Sends love song message" style="color:#FF8C00">Love this song!</a>'
+		+	'<a id="plug-btn-mehsong" title="Sends meh song message" style="color:#FF8C00">Not fan of song!</a>'
+		+	'<a id="plug-btn-hatesong" title="Sends hate song message" style="color:#FF8C00">Hates this song!</a>'
+		+	'<a title="Changes your status" style="color:#FFFFF">Status:</a>'
+		+	'<a id="plug-btn-sleeping" title="Sends sleep message and sets status to sleeping" style="color:#FF8C00">Sleeping</a>'
+		+	'<a id="plug-btn-working" title="Sends work message and sets status to working" style="color:#FF8C00">working</a>'
+		+	'<a id="plug-btn-afk" title="Sends afk message and sets status to afk" style="color:#FF8C00">afk</a>'
+		+	'<a id="plug-btn-back" title="Sends available message and sets status to available" style="color:#FF8C00">available</a>'
     );
 }
 
 function rules() {
-	alert("Rules: \n1) for all ages so no porn \n2) no songs over 8 mins \n3) spamming can lead to an instant ban \n4) please keep songs to EDM \n5) have fun!");
+	alert("Rules: \n1) Stay Dench \n2) No songs over 8 minutes \n3) No spamming \n4) Keep songs to EDM \n5) Report Dafuq League for intentional feed!");
 }
 
 function initUIListeners() {
@@ -798,7 +799,7 @@ function strobeListener() {
     strobeOnCommand.prototype.init = function() {
         this.command = '/strobe on';
         this.parseType = 'exact';
-        return this.rankPrivelege = 'cohost';
+        return this.rankPrivelege = 'manager';
     };
 
     strobeOnCommand.prototype.functionality = function() {
@@ -866,7 +867,7 @@ function strobeListener() {
 
 delay();
 $('#plugbot-js').remove();
-log("Also, welcome to Dubstep, Techno, and Electro custom script, coded by Nitro Ghost. Version: 4.1.4");
+log("Welcome to TeamBruce. Stay Dench! Version: 1.0.0");
 log("type '/commands' to see extra commands");
 $('body').prepend('<style type="text/css" id="plug-css">' + "\n" + styles.join("\n") + "\n" + '</style>');
 $('body').append('</div><div id="side-right" class="sidebar">' + '<div class="sidebar-handle"><span>|||</span></div>' + '<div class="sidebar-content"></div>' + '<div id="hr-div"><div><div id="hr-style"></div></div></div>' + '</div><div id="side-left" class="sidebar">' + '<div class="sidebar-handle" title="show/hide userlist"><span>|||</span></div>' + '<div class="sidebar-content2"></div>' + '<div id="hr2-div2"><div><div id="hr2-style2"></div></div></div>' + '</div>');

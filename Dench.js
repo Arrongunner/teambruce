@@ -69,13 +69,13 @@ function onCookiesLoaded() {
 }
 
 var words = {
-"Points" : "Beats!",
+"Points" : "Ratings!",
 "Now Playing" : "Now Spinning!",
 "Time Remaining" : "Time Remaining!",
-"Volume" : "Crank the Volume!",
+"Volume" : "Pump up the Volume!",
 "Current DJ" : "Disk Jockey",
 "Crowd Response" : "Crowd Reaction!",
-"Fans":"Stalkers!"};
+"Fans":"Ballas!"};
 
 String.prototype.prepareRegex = function() {
 return this.replace(/([\[\]\^\&\$\.\(\)\?\/\\\+\{\}\|])/g, "\\$1");
@@ -124,16 +124,16 @@ var COOKIE_AUDIENCE = 'audience';
 var COOKIE_LEFT = 'left';
 var MAX_USERS_WAITLIST = 50;
 
-var loveMsg = ["I love this song! Makes me want to jizz in my pants", "I love this song like a black man loves chicken!", "This... song... is... DENCH!!", "this song is a BEAST!", "Absolute fucking classic!", "#DenchTune"];
-var mehMsg = ["This is one of those songs i'm not sure if i love or hate :S", "meh.. not the best :L", "decent, but i've heard better..."];
-var hateMsg = ["I hate this song!", "wtf is this song.. #LeaveIT", "my ears are fucking bleeding, turn this shit off", "this song is worse than Dafuq League."];
-var sleepMsg = ["Off for a fap before bed, night!", "sleeping now, peace out mandems", "time to hit the sack", "so tired, *sleeps* zzzZZ!", "tiredness... must sleep... feel like a fucking zombie!", "Going to bed, night night <3"];
-var workMsg = ["Going to do some work, mention if needed!", "I'm going to do work related stuffs, do not disturb!", "I'm gonna be busy, mention if needed"];
+var loveMsg = ["I love this song! Makes me want to jizz in my pants.", "I love this song like a black man loves chicken!", "This... song... is... DENCH!!", "Absolute fucking classic!", "#DenchTune"];
+var mehMsg = ["Not sure if i love or hate this :S", "meh.. not the best :L", "decent, but i've heard better..."];
+var hateMsg = ["wtf is this song.. #LeaveIT", "my ears are fucking bleeding, turn this shit off", "this song is worse than Dafuq League."];
+var sleepMsg = ["Off for a fap before bed, night!", "sleeping now, peace out mandems", "so tired, *sleeps* zzzZZ!", "tiredness... must sleep... feel like a fucking zombie!", "Going to bed, night night <3"];
+var workMsg = ["Going to do some work, mention if needed!", "I'm gonna be busy, do not disturb!"];
 var afkMsg = ["I'm going for a fap, be back soon!", "Going to shag your mum!", "Going for a spray tan! #Essex #Reem", "Going to hunt the galaxy, be back soon!", "Going to go report Dafuq League!", "Gonna' go download some more RAM!"];
-var backMsg = ["Just got back from Denchville, two twos now.", "I'm baaacckkk bitches", "guess who's back? ME! I'm back :D", "I just came, what did I miss?"];
+var backMsg = ["Just got back from Denchville, two twos now.", "I'm baaacckkk bitches!", "Guess who's back? ME! I'm back :D", "I just came, what did I miss?"];
 
-var autoAwayMsg = ["I'm currently AFK", "I'm AFK", "Selling weed, brb. (afk)", "Gone for a wank, be back soon!", "not present at keyboard"];
-var autoSlpMsg = ["I'm currently sleeping", "I'm shagging Megan Fox in my dream, do not disturb!", "I've hit the sack", "I'm asleep", "In bed with your mum."];
+var autoAwayMsg = ["I'm currently AFK", "Selling weed, brb. (afk)", "Gone for a wank, be back soon!", "Not present at keyboard."];
+var autoSlpMsg = ["I'm currently sleeping", "I'm shagging Megan Fox in my dream, do not disturb!", "I've hit the sack", "I'm asleep in bed with your mum."];
 var autoWrkMsg = ["I'm currently working", "I'm busy", "I'm pretending to work, but really I'm just ignoring you...", "Trying to earn a dollar, your mum charges high rates!"];
 
 var styles = [
@@ -242,7 +242,7 @@ function rules() {
 }
 
 function dench() {
-	alert("Definition: \n When something is dench, denchable, denchtastic, denchalicious or even dencherific. Dench is out of this world. Dench is amazing. Dench is everything good in your life. \n \n #StayDench or get Frimpong'd");
+	alert("Definition: \n When something is dench, denchable, denchtastic, denchalicious or even dencherific. Dench is out of this world. Dench is amazing. Dench is everything good in your life. #StayDench or get Frimpong'd.");
 }
 
 function initUIListeners() {

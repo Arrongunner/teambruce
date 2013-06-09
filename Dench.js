@@ -72,7 +72,7 @@ var words = {
 "Points" : "Ratings!",
 "Now Playing" : "Now Spinning!",
 "Time Remaining" : "Time Remaining!",
-"Volume" : "Pump up the Volume!",
+"Volume" : "Pump the Volume!",
 "Current DJ" : "Disk Jockey",
 "Crowd Response" : "Crowd Reaction!",
 "Fans":"Ballas!"};

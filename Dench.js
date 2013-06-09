@@ -232,11 +232,24 @@ function displayUI() {
 		+	'<a id="plug-btn-afk" title="Sends afk message and sets status to afk" style="color:#FF8FEE">AFK</a>'
 		+	'<a id="plug-btn-back" title="Sends available message and sets status to available" style="color:#FF8FEE">Available</a>'
 		+	'<a  onclick="rules()" title="Displays Rules" style="color:#FFFFFF">Click for Rules!</a>'
+        +	'<div id="spacer_div"></br></br></div>'
+		+	'<a  onclick="dench()" title="Displays Dench" style="color:#FFFFFF">Dench!</a>'
     );
 }
 
 function rules() {
 	alert("Rules: \n1) Stay Dench \n2) No songs over 8 minutes \n3) No spamming \n4) Keep songs to EDM \n5) Report Dafuq League for intentional feed!");
+}
+
+function dench() {
+	alert("Definition: \n1) When something is dench, denchable, denchtastic, denchalicious or even dencherific. Dench is out of this world. Dench is amazing. Dench is everything good in your life. \n2) #StayDench or get Frimpong'd \n3) var img = new Image();
+var div = document.getElementById('foo');
+
+img.onload = function() {
+  div.appendChild(img);
+};
+
+img.src = 'http://media.sabotagetimes.com/wp-content/uploads/Emmanuel-Frimpong-Arsenal_2800802.jpg';");
 }
 
 function initUIListeners() {
@@ -481,15 +494,15 @@ function populateUserlist() {
         	totalMEHsPercentage = totalWOOTsPercentage = 0;
     	}
     	currentdj = ' ' + currentdj;
-	mehlist = '<a title="total mehs">' + ' ' + totalMEHs.toString() + '</a><a title=" meh percentage">' + ' (' + totalMEHsPercentage.toString() + '&#37;)' + '</a>' + mehlist;
-    	wootlist = '<a title="total woots">' + ' ' + totalWOOTs.toString() + '</a><a title=" woot percentage">' + ' (' + totalWOOTsPercentage.toString() + '&#37;)' + '</a>' + wootlist;
+	mehlist = '<a title="Total">' + ' ' + totalMEHs.toString() + '</a><a title="Percentage">' + ' (' + totalMEHsPercentage.toString() + '&#37;)' + '</a>' + mehlist;
+    	wootlist = '<a title="Total">' + ' ' + totalWOOTs.toString() + '</a><a title="Percentage">' + ' (' + totalWOOTsPercentage.toString() + '&#37;)' + '</a>' + wootlist;
     	undecidedlist = ' ' + totalUNDECIDEDs.toString() + undecidedlist;
 	if ($('#side-left .sidebar-content2').children().length > 0) {
             	$('#side-left .sidebar-content2').append();
 	}
-        $('#side-left .sidebar-content2').html('<h3 class="Users" title="Number of users in the room">users: ' + API.getUsers().length + '</h3>');
+        $('#side-left .sidebar-content2').html('<h3 class="Users" title="Number of users in the room">Users: ' + API.getUsers().length + '</h3>');
         var spot = Models.room.getWaitListPosition();
-        var waitlistDiv = $('<h3 title="Waitlist position"></h3>').addClass('waitlistspot').text('waitlist: ' + (spot !== null ? spot + ' / ' : '') + Models.room.data.waitList.length);
+        var waitlistDiv = $('<h3 title="Waitlist position"></h3>').addClass('waitlistspot').text('Waitlist: ' + (spot !== null ? spot + ' / ' : '') + Models.room.data.waitList.length);
         var waitpostime = Models.room.getWaitListPosition() * 240;
         var offset = API.getMedia().duration - 240;
         var approxtime = waitpostime + offset;

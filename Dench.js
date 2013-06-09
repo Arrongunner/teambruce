@@ -215,21 +215,23 @@ function displayUI() {
     	var colorEmotes = emotes ? '#3FFF00' : '#ED1C24';
     	var colorAudience = audience ? '#3FFF00' : '#ED1C24';
 	$('#side-right .sidebar-content').append(
-			'<a id="plug-btn-woot" title="Toggle AutoWoot" style="color:' + colorWoot + '">AutoWoot</a>'
+			'<a title="Commands" style="color:#FFFFF">Commands:</a>'
+		+	'<a id="plug-btn-woot" title="Toggle AutoWoot" style="color:' + colorWoot + '">AutoWoot</a>'
 		+ 	'<a id="plug-btn-queue" title="Toggle AutoQueue" style="color:' + colorQueue + '">AutoQueue</a>'
 		+ 	'<a id="plug-btn-stream" title="Toggle Video Stream" style="color:' + colorStream + '">Video Streaming</a>'
 		+ 	'<a id="plug-btn-hidevideo" title="Toggle Video" style="color:' + colorVideo + '">Hide Video</a>'
 		+	'<a id="plug-btn-emotes" title="Toggle Emoticons" style="color:' + colorEmotes + '">Emoticons</a>'
 		+	'<a id="plug-btn-audience" title="Toggle Audience" style="color:' + colorAudience + '">Audience</a>'
-		+	'<a  onclick="rules()" title="Displays Rules" style="color:#0000FF">rules</a>'
+		+	'<a title="Comment on song" style="color:#FFFFF">Comment on song:</a>'
 		+	'<a id="plug-btn-lovesong" title="Sends love song message" style="color:#FF8C00">Love this song!</a>'
 		+	'<a id="plug-btn-mehsong" title="Sends meh song message" style="color:#FF8C00">Not fan of song!</a>'
 		+	'<a id="plug-btn-hatesong" title="Sends hate song message" style="color:#FF8C00">Hates this song!</a>'
 		+	'<a title="Changes your status" style="color:#FFFFF">Status:</a>'
-		+	'<a id="plug-btn-sleeping" title="Sends sleep message and sets status to sleeping" style="color:#FF8C00">Sleeping</a>'
-		+	'<a id="plug-btn-working" title="Sends work message and sets status to working" style="color:#FF8C00">working</a>'
-		+	'<a id="plug-btn-afk" title="Sends afk message and sets status to afk" style="color:#FF8C00">afk</a>'
-		+	'<a id="plug-btn-back" title="Sends available message and sets status to available" style="color:#FF8C00">available</a>'
+		+	'<a id="plug-btn-sleeping" title="Sends sleep message and sets status to sleeping" style="color:#FF8FEE">Sleeping</a>'
+		+	'<a id="plug-btn-working" title="Sends work message and sets status to working" style="color:#FF8FEE">Working</a>'
+		+	'<a id="plug-btn-afk" title="Sends afk message and sets status to afk" style="color:#FF8FEE">AFK</a>'
+		+	'<a id="plug-btn-back" title="Sends available message and sets status to available" style="color:#FF8FEE">Available</a>'
+		+	'<a  onclick="rules()" title="Displays Rules" style="color:#FFFFFF">Click for Rules!</a>'
     );
 }
 

@@ -131,6 +131,7 @@ var sleepMsg = ["Off for a fap before bed, night!", "sleeping now, peace out man
 var workMsg = ["Going to do some work, mention if needed!", "I'm gonna be busy, do not disturb!"];
 var afkMsg = ["I'm going for a fap, be back soon!", "Going to shag your mum!", "Going for a spray tan! #Essex #Reem", "Going to hunt the galaxy, be back soon!", "Going to go report Dafuq League!", "Gonna' go download some more RAM!"];
 var backMsg = ["Just got back from Denchville, two twos now.", "I'm baaacckkk bitches!", "Guess who's back? ME! I'm back :D", "I just came, what did I miss?"];
+var ExtraAvatars = ["/ca"];
 
 var autoAwayMsg = ["I'm currently AFK", "Selling weed, brb. (afk)", "Gone for a wank, be back soon!", "Not present at keyboard."];
 var autoSlpMsg = ["I'm currently sleeping", "I'm shagging Megan Fox in my dream, do not disturb!", "I've hit the sack", "I'm asleep in bed with your mum."];
@@ -225,6 +226,7 @@ function displayUI() {
 		+	'<a title="Comment on song" style="color:#FFFFF">Comment on song:</a>'
 		+	'<a id="plug-btn-lovesong" title="Sends love song message" style="color:#FF8C00">Love this song!</a>'
 		+	'<a id="plug-btn-mehsong" title="Sends meh song message" style="color:#FF8C00">Not fan of song!</a>'
+		+	'<a id="plug-btn-avatars" title="Acess more avatars!" style="color:#FF8C00">Avatars</a>'
 		+	'<a id="plug-btn-hatesong" title="Sends hate song message" style="color:#FF8C00">Hates this song!</a>'
 		+	'<a title="Changes your status" style="color:#FFFFF">Status:</a>'
 		+	'<a id="plug-btn-sleeping" title="Sends sleep message and sets status to sleeping" style="color:#FF8FEE">Sleeping</a>'
@@ -343,6 +345,13 @@ function initUIListeners() {
 				API.sendChat(workMsg[Math.floor(Math.random() * workMsg.length)]);
 				Models.user.changeStatus(2);
 			}
+		}
+	});	
+	$("#plug-btn-avatars").on("click", function() {
+		if (clicked == false) {
+			clicked = true;
+			clickTimer = setInterval("checkClicked();", 1000);
+			API.sendChat(ExtraAvatars[Math.floor(Math.random() * ExtraAvatars.length)]);
 		}
 	});	
 	$("#plug-btn-afk").on("click", function() {

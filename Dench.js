@@ -847,7 +847,7 @@ function chatListener() {
 
 delay();
 $('#plugbot-js').remove();
-log("Welcome to TeamBruce. Coded by Nitro Ghost. Stay Dench! Version: 1.0.0");
+log("Welcome to ►House & EDM◄ Coded by Nitro Ghost. Stay Dench! Version: 1.0.0");
 log("type '/commands' to see extra commands");
 $('body').prepend('<style type="text/css" id="plug-css">' + "\n" + styles.join("\n") + "\n" + '</style>');
 $('body').append('</div><div id="side-right" class="sidebar">' + '<div class="sidebar-handle"><span>|||</span></div>' + '<div class="sidebar-content"></div>' + '<div id="hr-div"><div><div id="hr-style"></div></div></div>' + '</div><div id="side-left" class="sidebar">' + '<div class="sidebar-handle" title="show/hide userlist"><span>|||</span></div>' + '<div class="sidebar-content2"></div>' + '<div id="hr2-div2"><div><div id="hr2-style2"></div></div></div>' + '</div>');

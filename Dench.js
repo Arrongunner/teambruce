@@ -75,7 +75,7 @@ var words = {
 "Volume" : "Pump the Volume!",
 "Current DJ" : "Disk Jockey",
 "Crowd Response" : "Crowd Reaction!",
-"Fans":"Ballas!"};
+"Fans":"Followers!"};
 
 String.prototype.prepareRegex = function() {
 return this.replace(/([\[\]\^\&\$\.\(\)\?\/\\\+\{\}\|])/g, "\\$1");
@@ -238,7 +238,7 @@ function displayUI() {
 }
 
 function rules() {
-	alert("Rules: \n1) Stay Dench \n2) No songs over 8 minutes \n3) No spamming \n4) Keep songs to EDM \n5) Report Dafuq League for intentional feed!");
+	alert("Rules: \n1) House and EDM only! \n2) No songs over 8 minutes \n3) No flaming \n4) No spamming \n5) Respect Staff \n6) Stay Dench!");
 }
 
 function dench() {

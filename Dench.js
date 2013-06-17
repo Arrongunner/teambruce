@@ -236,7 +236,7 @@ function displayUI() {
         +	'<div id="spacer_div"></br></br></div>'
 		+	'<a  onclick="dench()" title="Displays Dench" style="color:#FFFFFF">Dench!</a>'
         +	'<div id="spacer_div"></br></br></div>'
-		+	'<a id="plug-btn-avatars" title="Acess more avatars!" style="color:#FFFFFF">Avatars</a>'
+		+	'<a id="plug-btn-avatars" title="Acess more avatars!" style="color:#FFFFFF">Avatars!</a>'
     );
 }
 

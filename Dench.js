@@ -1,7 +1,7 @@
 function delay() {
-  	setTimeout("load();", 6000);
+	setTimeout("load();", 6000);
 	setTimeout(function(){RoomUser.audience.roomElements = []; RoomUser.redraw();}, 4000);
-	setTimeout("strobeListener();", 10000);
+	setTimeout("chatListener()", 10000);
 }
 
 function load() {
@@ -621,264 +621,233 @@ ccm = Class.extend({
 
 var cc = new ccm();
 
-function strobeListener() {
-  var strobeOnCommand, Command, User, apiHooks, chatCommandDispatcher, cmds, data, hook, initHooks, initialize, populateUserData, settings, undoHooks, unhook,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+function chatListener() {
+  	var antispam, strobeOnCommand, Command, User, apiHooks, chatCommandDispatcher, chatUniversals, cmds, data, hook, initHooks, initialize, populateUserData, settings, undoHooks, unhook,
+    	__bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    	__indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
+    	__hasProp = {}.hasOwnProperty,
+    	__extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+  	settings = (function() {
+    		function settings() {
+      			this.getRoomUrlPath = __bind(this.getRoomUrlPath, this);
+      			this.startup = __bind(this.startup, this);
+		}
+    		settings.prototype.users = {};
+    		settings.prototype.roomUrlPath = null;
+    		settings.prototype.launchTime = null;
+    		settings.prototype.startup = function() {
+      		this.launchTime = new Date();
+      		return this.roomUrlPath = this.getRoomUrlPath();
+    		};
+    		settings.prototype.getRoomUrlPath = function() {
+      			return window.location.pathname.replace(/\//g, '');
+    		};
+    		return settings;
+  	})();
+  	data = new settings();
+  	User = (function() {
 
-  settings = (function() {
-
-    function settings() {
-
-      this.getRoomUrlPath = __bind(this.getRoomUrlPath, this);
-
-      this.startup = __bind(this.startup, this);
-
-    }
-
-    settings.prototype.users = {};
-
-    settings.prototype.roomUrlPath = null;
-
-    settings.prototype.launchTime = null;
-
-    settings.prototype.startup = function() {
-      this.launchTime = new Date();
-      return this.roomUrlPath = this.getRoomUrlPath();
-    };
-
-    settings.prototype.getRoomUrlPath = function() {
-      return window.location.pathname.replace(/\//g, '');
-    };
-
-    return settings;
-
-  })();
-
-  data = new settings();
-
-  User = (function() {
-
-    function User(user) {
-      this.user = user;
-
-      this.getIsDj = __bind(this.getIsDj, this);
-
-      this.getUser = __bind(this.getUser, this);
-
-    }
-
-    User.prototype.getUser = function() {
-      return this.user;
-    };
-
-    User.prototype.getIsDj = function() {
-      var DJs, dj, _i, _len;
-      DJs = API.getDJs();
-      for (_i = 0, _len = DJs.length; _i < _len; _i++) {
-        dj = DJs[_i];
-        if (this.user.id === dj.id) {
-          return true;
-        }
-      }
-      return false;
-    };
-
-    return User;
-
-  })();
-  
-  populateUserData = function() {
-    var u, users, _i, _len;
-    users = API.getUsers();
-    for (_i = 0, _len = users.length; _i < _len; _i++) {
-      u = users[_i];
-      data.users[u.id] = new User(u);
-    }
-  };
-
-  initialize = function() {
-    populateUserData();
-    initHooks();
-    data.startup();
-  };
-
-  Command = (function() {
-
-    function Command(msgData) {
-      this.msgData = msgData;
-      this.init();
-    }
-
-    Command.prototype.init = function() {
-      this.parseType = null;
-      this.command = null;
-      return this.rankPrivelege = null;
-    };
-
-    Command.prototype.functionality = function(data) {};
-
-    Command.prototype.hasPrivelege = function() {
-      var user;
-      user = data.users[this.msgData.fromID].getUser();
-      switch (this.rankPrivelege) {
-        case 'host':
-          return user.permission === 5;
-        case 'cohost':
-          return user.permission >= 4;
-        case 'mod':
-          return user.permission >= 3;
-        case 'manager':
-          return user.permission >= 3;
-        case 'bouncer':
-          return user.permission >= 2;
-        case 'featured':
-          return user.permission >= 1;
-        default:
-          return true;
-      }
-    };
-
-    Command.prototype.commandMatch = function() {
-      var command, msg, _i, _len, _ref;
-      msg = this.msgData.message;
-      if (typeof this.command === 'string') {
-        if (this.parseType === 'exact') {
-          if (msg === this.command) {
-            return true;
-          } else {
-            return false;
-          }
-        } else if (this.parseType === 'startsWith') {
-          if (msg.substr(0, this.command.length) === this.command) {
-            return true;
-          } else {
-            return false;
-          }
-        } else if (this.parseType === 'contains') {
-          if (msg.indexOf(this.command) !== -1) {
-            return true;
-          } else {
-            return false;
-          }
-        }
-      } else if (typeof this.command === 'object') {
-        _ref = this.command;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          command = _ref[_i];
-          if (this.parseType === 'exact') {
-            if (msg === command) {
-              return true;
-            }
-          } else if (this.parseType === 'startsWith') {
-            if (msg.substr(0, command.length) === command) {
-              return true;
-            }
-          } else if (this.parseType === 'contains') {
-            if (msg.indexOf(command) !== -1) {
-              return true;
-            }
-          }
-        }
-        return false;
-      }
-    };
-
-    Command.prototype.evalMsg = function() {
-      if (this.commandMatch() && this.hasPrivelege()) {
-        this.functionality();
-        return true;
-      } else {
-        return false;
-      }
-    };
-
-    return Command;
-
-  })();
-
-  strobeOnCommand = (function(_super) {
-      
-    __extends(strobeOnCommand, _super);
-
-    function strobeOnCommand() {
-        return strobeOnCommand.__super__.constructor.apply(this, arguments);
-    }
-    
-    strobeOnCommand.prototype.init = function() {
-        this.command = '/strobe on';
-        this.parseType = 'exact';
-        return this.rankPrivelege = 'manager';
-    };
-
-    strobeOnCommand.prototype.functionality = function() {
-      return RoomUser.audience.strobeMode(true);
-    }
-  
-    return strobeOnCommand;
-    
-  })(Command);
-
-  cmds = [strobeOnCommand];
-  
-  chatCommandDispatcher = function(chat) {
-    var c, cmd, _i, _len, _results;
-    _results = [];
-    for (_i = 0, _len = cmds.length; _i < _len; _i++) {
-      cmd = cmds[_i];
-      c = new cmd(chat);
-      if (c.evalMsg()) {
-        break;
-      } else {
-        _results.push(void 0);
-      }
-    }
-    return _results;
-  };
-
-  hook = function(apiEvent, callback) {
-    return API.addEventListener(apiEvent, callback);
-  };
-
-  unhook = function(apiEvent, callback) {
-    return API.removeEventListener(apiEvent, callback);
-  };
-
-  apiHooks = [
-    {
-      'event': API.CHAT,
-      'callback': chatCommandDispatcher
-    }
-  ];
-
-  initHooks = function() {
-    var pair, _i, _len, _results;
-    _results = [];
-    for (_i = 0, _len = apiHooks.length; _i < _len; _i++) {
-      pair = apiHooks[_i];
-      _results.push(hook(pair['event'], pair['callback']));
-    }
-    return _results;
-  };
-
-  undoHooks = function() {
-    var pair, _i, _len, _results;
-    _results = [];
-    for (_i = 0, _len = apiHooks.length; _i < _len; _i++) {
-      pair = apiHooks[_i];
-      _results.push(unhook(pair['event'], pair['callback']));
-    }
-    return _results;
-  };
-
-  initialize();
+    		function User(user) {
+      			this.user = user;
+      			this.getIsDj = __bind(this.getIsDj, this);
+     			this.getUser = __bind(this.getUser, this);
+    		}
+    		User.prototype.getUser = function() {
+      			return this.user;
+    		};
+    		User.prototype.getIsDj = function() {
+      			var DJs, dj, _i, _len;
+      			DJs = API.getDJs();
+      			for (_i = 0, _len = DJs.length; _i < _len; _i++) {
+        			dj = DJs[_i];
+        			if (this.user.id === dj.id) {
+          				return true;
+        			}
+      			}
+      			return false;
+    		};
+    		return User;
+	})(); 
+  	populateUserData = function() {
+    		var u, users, _i, _len;
+    		users = API.getUsers();
+    		for (_i = 0, _len = users.length; _i < _len; _i++) {
+      			u = users[_i];
+      			data.users[u.id] = new User(u);
+    		}
+  	};
+  	initialize = function() {
+    		populateUserData();
+    		initHooks();
+    		data.startup();
+  	};
+  	Command = (function() {
+    		function Command(msgData) {
+      			this.msgData = msgData;
+      			this.init();
+    		}
+    		Command.prototype.init = function() {
+      			this.parseType = null;
+      			this.command = null;
+      			return this.rankPrivelege = null;
+    		};
+    		Command.prototype.functionality = function(data) {};
+    		Command.prototype.hasPrivelege = function() {
+      			var user;
+     			user = data.users[this.msgData.fromID].getUser();
+     			switch (this.rankPrivelege) {
+        			case 'host':
+          				return user.permission === 5;
+        			case 'cohost':
+          				return user.permission >= 4;
+        			case 'mod':
+          				return user.permission >= 3;
+        			case 'manager':
+          				return user.permission >= 3;
+        			case 'bouncer':
+          				return user.permission >= 2;
+        			case 'featured':
+          				return user.permission >= 1;
+        			default:
+          				return true;
+      			}
+    		};
+    		Command.prototype.commandMatch = function() {
+      			var command, msg, _i, _len, _ref;
+      			msg = this.msgData.message;
+      			if (typeof this.command === 'string') {
+        			if (this.parseType === 'exact') {
+          				if (msg === this.command) {
+            					return true;
+          				} else {
+            					return false;
+          				}
+        			} else if (this.parseType === 'startsWith') {
+          				if (msg.substr(0, this.command.length) === this.command) {
+            					return true;
+          				} else {
+            					return false;
+          				}
+        			} else if (this.parseType === 'contains') {
+          				if (msg.indexOf(this.command) !== -1) {
+            					return true;
+          				} else {
+            					return false;
+          				}
+        			}
+      			} else if (typeof this.command === 'object') {
+        			_ref = this.command;
+        			for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          				command = _ref[_i];
+          				if (this.parseType === 'exact') {
+            					if (msg === command) {
+              						return true;
+            					}
+          				} else if (this.parseType === 'startsWith') {
+            					if (msg.substr(0, command.length) === command) {
+              						return true;
+            					}
+          				} else if (this.parseType === 'contains') {
+            					if (msg.indexOf(command) !== -1) {
+              						return true;
+            					}
+          				}
+        			}
+        			return false;
+      			}
+    		};
+    		Command.prototype.evalMsg = function() {
+      			if (this.commandMatch() && this.hasPrivelege()) {
+        			this.functionality();
+        			return true;
+      			} else {
+        			return false;
+      			}
+    		};
+    		return Command;
+  	})();
+  	strobeOnCommand = (function(_super) { 
+    		__extends(strobeOnCommand, _super);
+    		function strobeOnCommand() {
+        		return strobeOnCommand.__super__.constructor.apply(this, arguments);
+    		}
+    		strobeOnCommand.prototype.init = function() {
+        		this.command = '/strobe on';
+        		this.parseType = 'exact';
+        		return this.rankPrivelege = 'manager';
+    		};
+    		strobeOnCommand.prototype.functionality = function() {
+      			return RoomUser.audience.strobeMode(true);
+    		}
+    		return strobeOnCommand;
+  	})(Command);
+  	cmds = [strobeOnCommand];
+  	chatCommandDispatcher = function(chat) {
+    		var c, cmd, _i, _len, _results;
+    		chatUniversals(chat);
+    		_results = [];
+    		for (_i = 0, _len = cmds.length; _i < _len; _i++) {
+      			cmd = cmds[_i];
+      			c = new cmd(chat);
+      			if (c.evalMsg()) {
+        			break;
+      			} else {
+        			_results.push(void 0);
+      			}
+    		}
+    		return _results;
+  	};
+  	antispam = function(chat) {
+  		var plugRoomLinkPatt, sender;
+  		plugRoomLinkPatt = /(\bhttps?:\/\/(www.)?adf\.ly[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+  		if (plugRoomLinkPatt.exec(chat.message)) {
+    			sender = API.getUser(chat.fromID);
+    			if (!sender.ambassador && !sender.moderator && !sender.owner && !sender.superuser) {
+    				API.sendChat("@" + sender.username + " " + spamMsg[Math.floor(Math.random() * spamMsg.length)]);
+       				return API.moderateDeleteChat(chat.chatID);
+     			}
+   		}
+   		return antispam;
+ 	};
+  	chatUniversals = function(chat) {
+      		antispam(chat);
+  	};
+  	hook = function(apiEvent, callback) {
+    		return API.addEventListener(apiEvent, callback);
+  	};
+  	unhook = function(apiEvent, callback) {
+    		return API.removeEventListener(apiEvent, callback);
+  	};
+  	apiHooks = [
+    		{
+      			'event': API.CHAT,
+      			'callback': chatCommandDispatcher
+    		}
+  	];
+  	initHooks = function() {
+    		var pair, _i, _len, _results;
+    		_results = [];
+    		for (_i = 0, _len = apiHooks.length; _i < _len; _i++) {
+      			pair = apiHooks[_i];
+      			_results.push(hook(pair['event'], pair['callback']));
+    		}
+    		return _results;
+  		};
+  	undoHooks = function() {
+    		var pair, _i, _len, _results;
+   		 _results = [];
+    		for (_i = 0, _len = apiHooks.length; _i < _len; _i++) {
+      			pair = apiHooks[_i];
+      			_results.push(unhook(pair['event'], pair['callback']));
+    		}
+    		return _results;
+  	};
+  	initialize();
 }
 
 delay();
 $('#plugbot-js').remove();
-log("Welcome to TeamBruce. Stay Dench! Version: 1.0.0");
+log("Welcome to TeamBruce. Coded by Nitro Ghost. Stay Dench! Version: 1.0.0");
 log("type '/commands' to see extra commands");
 $('body').prepend('<style type="text/css" id="plug-css">' + "\n" + styles.join("\n") + "\n" + '</style>');
 $('body').append('</div><div id="side-right" class="sidebar">' + '<div class="sidebar-handle"><span>|||</span></div>' + '<div class="sidebar-content"></div>' + '<div id="hr-div"><div><div id="hr-style"></div></div></div>' + '</div><div id="side-left" class="sidebar">' + '<div class="sidebar-handle" title="show/hide userlist"><span>|||</span></div>' + '<div class="sidebar-content2"></div>' + '<div id="hr2-div2"><div><div id="hr2-style2"></div></div></div>' + '</div>');

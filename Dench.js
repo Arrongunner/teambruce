@@ -226,7 +226,6 @@ function displayUI() {
 		+	'<a title="Comment on song" style="color:#FFFFF">Comment on song:</a>'
 		+	'<a id="plug-btn-lovesong" title="Sends love song message" style="color:#FF8C00">Love this song!</a>'
 		+	'<a id="plug-btn-mehsong" title="Sends meh song message" style="color:#FF8C00">Not fan of song!</a>'
-		+	'<a id="plug-btn-avatars" title="Acess more avatars!" style="color:#FF8C00">Avatars</a>'
 		+	'<a id="plug-btn-hatesong" title="Sends hate song message" style="color:#FF8C00">Hates this song!</a>'
 		+	'<a title="Changes your status" style="color:#FFFFF">Status:</a>'
 		+	'<a id="plug-btn-sleeping" title="Sends sleep message and sets status to sleeping" style="color:#FF8FEE">Sleeping</a>'
@@ -236,6 +235,7 @@ function displayUI() {
 		+	'<a  onclick="rules()" title="Displays Rules" style="color:#FFFFFF">Click for Rules!</a>'
         +	'<div id="spacer_div"></br></br></div>'
 		+	'<a  onclick="dench()" title="Displays Dench" style="color:#FFFFFF">Dench!</a>'
+		+	'<a id="plug-btn-avatars" title="Acess more avatars!" style="color:#FF8C00">Avatars</a>'
     );
 }
 
